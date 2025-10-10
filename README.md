@@ -1,6 +1,7 @@
-# Golligog Flutter UI
 
-A modern, privacy-focused search engine application built with Flutter, featuring user authentication and a clean, intuitive interface inspired by popular search engines.
+# Golligog Flutter UI (iOS)
+
+A modern, privacy-focused search engine application built with Flutter, featuring user authentication and a clean, intuitive interface inspired by popular search engines. This guide focuses on running and building the app for **iOS**.
 
 ## Features
 
@@ -11,15 +12,19 @@ A modern, privacy-focused search engine application built with Flutter, featurin
 - **Responsive Design**: Clean, modern UI that works across different screen sizes
 - **Local Backend Integration**: Connects to local backend services for authentication and additional features
 
-## Prerequisites
 
-Before running this application, ensure you have the following installed:
+## Prerequisites (iOS)
 
+Before running or building the iOS app, ensure you have the following:
+
+- **macOS** with latest updates
+- **Xcode** (latest version, with Command Line Tools)
 - **Flutter SDK** (version 3.9.0 or higher)
+- **CocoaPods** (install via `sudo gem install cocoapods`)
 - **Dart SDK** (included with Flutter)
-- **Android Studio** or **VS Code** with Flutter extensions (for development)
-- **Backend Server**: A local backend server running on `http://localhost:5000` (handles authentication and user data)
-- **SearXNG Instance**: SearXNG search engine running on `http://localhost:8080` (provides search functionality)
+- **Backend Server**: Running on `http://localhost:5000` (handles authentication and user data)
+- **SearXNG Instance**: Running on `http://localhost:8080` (provides search functionality)
+
 
 ## Installation
 
@@ -34,11 +39,19 @@ Before running this application, ensure you have the following installed:
    flutter pub get
    ```
 
-3. **Set up your development environment**:
-   - Ensure Flutter is properly configured: `flutter doctor`
-   - Set up your preferred IDE (Android Studio/VS Code) with Flutter plugins
+3. **Install CocoaPods dependencies** (from the `ios` directory):
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
 
-## Running the Application
+4. **Set up your development environment**:
+   - Ensure Flutter is properly configured: `flutter doctor`
+   - Open the project in Xcode for iOS-specific settings if needed
+
+
+## Running the iOS App
 
 ### Prerequisites Setup
 
@@ -47,10 +60,11 @@ Before running the Flutter app, you need to start the required backend services:
 1. **Start your backend server** on `localhost:5000`
 2. **Start SearXNG** on `localhost:8080`
 
-### Run the App
+### Run the App on iOS Simulator or Device
 
-1. **Connect a device or start an emulator**:
+1. **Connect an iOS device or start a simulator**:
    ```bash
+   open -a Simulator # (or use Xcode to launch a simulator)
    flutter devices
    ```
 
@@ -63,6 +77,34 @@ Before running the Flutter app, you need to start the required backend services:
    ```bash
    flutter run --release
    ```
+
+## Building an iOS Release (IPA) File
+
+To create a release build (IPA) for iOS:
+
+1. **Ensure all dependencies are installed**:
+   ```bash
+   flutter pub get
+   cd ios
+   pod install
+   cd ..
+   ```
+
+2. **Build the iOS app for release**:
+   ```bash
+   flutter build ios --release
+   ```
+
+   This will generate an Xcode project in the `ios/` directory and build the app for release.
+
+3. **Archive and export IPA using Xcode**:
+   - Open the project in Xcode: `open ios/Runner.xcworkspace`
+   - Select your target device (Generic iOS Device or a real device)
+   - Go to **Product > Archive**
+   - After archiving, use the Xcode Organizer to export the `.ipa` file for App Store or Ad Hoc distribution
+
+For more details, see the [Flutter iOS build documentation](https://docs.flutter.dev/deployment/ios).
+
 
 ## Project Structure
 
@@ -82,6 +124,7 @@ lib/
 │   └── searxng_service.dart     # SearXNG search service
 ```
 
+
 ## Dependencies
 
 Key dependencies used in this project:
@@ -91,6 +134,7 @@ Key dependencies used in this project:
 - `url_launcher`: For opening URLs in search results
 - `json_annotation`: For JSON serialization
 
+
 ## API Endpoints
 
 The app communicates with the following local services:
@@ -98,6 +142,7 @@ The app communicates with the following local services:
 - **Authentication API**: `http://localhost:5000/api/auth`
 - **Search API**: `http://localhost:5000/api/search`
 - **SearXNG**: `http://localhost:8080/search`
+
 
 ## Development
 
@@ -117,19 +162,16 @@ Run tests:
 flutter test
 ```
 
-### Building for Production
 
-**Android APK**:
-```bash
-flutter build apk --release
-```
+### Building for iOS Production
 
 **iOS** (on macOS):
 ```bash
 flutter build ios --release
 ```
 
-## Troubleshooting
+
+## Troubleshooting (iOS)
 
 ### Common Issues
 
@@ -141,17 +183,21 @@ flutter build ios --release
    - Verify SearXNG is running on `localhost:8080`
    - Check SearXNG configuration and logs
 
+
 3. **Flutter Doctor Issues**:
    - Run `flutter doctor` and resolve any reported issues
-   - Ensure Android SDK/iOS SDK is properly installed
+   - Ensure Xcode and iOS SDK are properly installed
+
 
 4. **Build Failures**:
    - Run `flutter clean` then `flutter pub get`
+   - Run `cd ios && pod install && cd ..`
    - Check for dependency conflicts
 
 ### Debug Mode
 
 Enable debug logging by setting the debug flag in the app settings or checking console output during development.
+
 
 ## Contributing
 
@@ -161,9 +207,11 @@ Enable debug logging by setting the debug flag in the app settings or checking c
 4. Push to the branch: `git push origin feature/your-feature`
 5. Submit a pull request
 
+
 ## License
 
 This project is private and not intended for public distribution.
+
 
 ## Support
 
