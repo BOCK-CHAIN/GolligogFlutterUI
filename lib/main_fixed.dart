@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'search_results_page.dart';
+import 'config/app_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppConfig.load();
   runApp(const GolligogApp());
 }
 

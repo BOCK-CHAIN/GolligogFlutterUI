@@ -30,12 +30,23 @@ Before running or building the Android app, ensure you have the following instal
    cd GolligogFlutterUI
    ```
 
-2. **Install Flutter dependencies**:
+2. **Configure environment variables**:
+   - Copy the `.env.example` file to `.env`:
+     ```bash
+     copy .env.example .env
+     ```
+   - Edit the `.env` file and update the URLs if your services run on different ports:
+     ```properties
+     BACKEND_BASE_URL=http://localhost:5000
+     SEARXNG_BASE_URL=http://localhost:8080
+     ```
+
+3. **Install Flutter dependencies**:
    ```bash
    flutter pub get
    ```
 
-3. **Set up your development environment**:
+4. **Set up your development environment**:
    - Ensure Flutter is properly configured: `flutter doctor`
    - Set up Android Studio with Flutter plugins
    - Configure Android SDK paths if needed
@@ -44,10 +55,12 @@ Before running or building the Android app, ensure you have the following instal
 
 ### Prerequisites Setup
 
-Before running the Flutter app, you need to start the required backend services:
+Before running the Flutter app, ensure your backend services are running at the URLs configured in your `.env` file:
 
-1. **Start your backend server** on `localhost:5000`
-2. **Start SearXNG** on `localhost:8080`
+1. **Start your backend server** (default: `localhost:5000`)
+2. **Start SearXNG** (default: `localhost:8080`)
+
+> **Note**: The app now reads these URLs from the `.env` file, so you can easily change them without modifying the code.
 
 ### Run the App on Android Emulator or Device
 
@@ -163,13 +176,39 @@ Key dependencies used in this project:
 - `url_launcher`: For opening URLs in search results
 - `json_annotation`: For JSON serialization
 
+## Environment Configuration
+
+The application uses a `.env` file to manage API endpoints. This allows you to easily change backend URLs without modifying the code.
+
+### Environment Variables
+
+Create a `.env` file in the root directory (you can copy from `.env.example`):
+
+```properties
+# Backend API Configuration
+BACKEND_BASE_URL=http://localhost:5000
+
+# SearXNG Configuration
+SEARXNG_BASE_URL=http://localhost:8080
+```
+
+### Configuration Details
+
+- **BACKEND_BASE_URL**: Base URL for your authentication and search backend API
+- **SEARXNG_BASE_URL**: Base URL for your SearXNG instance
+
+**Important Notes**:
+- The `.env` file is excluded from version control (`.gitignore`)
+- Use `.env.example` as a template for your local configuration
+- After changing `.env`, restart the app for changes to take effect
+
 ## API Endpoints
 
-The app communicates with the following local services:
+The app communicates with the following services (configurable via `.env`):
 
-- **Authentication API**: `http://localhost:5000/api/auth`
-- **Search API**: `http://localhost:5000/api/search`
-- **SearXNG**: `http://localhost:8080/search`
+- **Authentication API**: `{BACKEND_BASE_URL}/api/auth`
+- **Search API**: `{BACKEND_BASE_URL}/api/search`
+- **SearXNG**: `{SEARXNG_BASE_URL}/search`
 
 ## Development
 

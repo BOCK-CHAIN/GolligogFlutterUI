@@ -4,8 +4,11 @@ import 'auth_wrapper.dart';
 import 'search_history_page.dart';
 import 'profile_page.dart';
 import 'services/auth_service.dart';
+import 'config/app_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppConfig.load();
   runApp(const GolligogApp());
 }
 
