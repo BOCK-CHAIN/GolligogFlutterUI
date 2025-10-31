@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../config/app_config.dart';
 
 class AuthService {
-  static const String _baseUrl = 'http://localhost:5000/api/auth';
-  static const String _searchUrl = 'http://localhost:5000/api/search';
+  static String get _baseUrl => AppConfig.backendAuthUrl;
+  static String get _searchUrl => AppConfig.backendSearchUrl;
   static const String _tokenKey = 'auth_token';
   static const String _userKey = 'user_data';
   
