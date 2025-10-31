@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/search_models.dart';
+import '../config/app_config.dart';
 
 class SearXNGService {
-  // SearXNG instance URL - running locally as backend
-  static const String _baseUrl = 'http://localhost:8080';
+  // SearXNG instance URL - loaded from environment variables
+  static String get _baseUrl => AppConfig.searxngBaseUrl;
   static const String _searchEndpoint = '/search';
   
   final http.Client _client = http.Client();
