@@ -226,21 +226,24 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
           
           const SizedBox(height: 20),
           
-          // Category navigation
-          Row(
-            children: [
-              _buildCategoryButton('All', 'general'),
-              _buildCategoryButton('Images', 'images'),
-              _buildCategoryButton('Videos', 'videos'),
-              _buildCategoryButton('News', 'news'),
-              _buildCategoryButton('Maps', 'map'),
-              _buildCategoryButton('Books', 'files'),
-              _buildCategoryButton('Scholar', 'science'),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.more_vert, color: Colors.white70),
-              ),
-            ],
+          // Category navigation - made scrollable
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildCategoryButton('All', 'general'),
+                _buildCategoryButton('Images', 'images'),
+                _buildCategoryButton('Videos', 'videos'),
+                _buildCategoryButton('News', 'news'),
+                _buildCategoryButton('Maps', 'map'),
+                _buildCategoryButton('Books', 'files'),
+                _buildCategoryButton('Scholar', 'science'),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.more_vert, color: Colors.white70),
+                ),
+              ],
+            ),
           ),
         ],
       ),
