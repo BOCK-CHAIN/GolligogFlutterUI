@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'search_results_page.dart';
+import 'config/app_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppConfig.load();
   runApp(const GolligogApp());
 }
 
@@ -130,7 +133,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildLogo() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: RichText(
         textAlign: TextAlign.center,
         text: const TextSpan(
@@ -138,7 +141,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'G',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF4285F4),
                 fontFamily: 'Arial',
@@ -147,7 +150,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'o',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFFEA4335),
                 fontFamily: 'Arial',
@@ -156,7 +159,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'l',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFFFBBC05),
                 fontFamily: 'Arial',
@@ -165,7 +168,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'l',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF4285F4),
                 fontFamily: 'Arial',
@@ -174,7 +177,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'i',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF34A853),
                 fontFamily: 'Arial',
@@ -183,7 +186,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'g',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFFEA4335),
                 fontFamily: 'Arial',
@@ -192,7 +195,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'o',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFFFBBC05),
                 fontFamily: 'Arial',
@@ -201,7 +204,7 @@ class _HomePageState extends State<HomePage> {
             TextSpan(
               text: 'g',
               style: TextStyle(
-                fontSize: 90,
+                fontSize: 60,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF4285F4),
                 fontFamily: 'Arial',
