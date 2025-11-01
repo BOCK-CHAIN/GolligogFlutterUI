@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'services/auth_service.dart';
 
 class SignupPage extends StatefulWidget {
@@ -101,92 +100,176 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        left: 32.0,
+        right: 32.0,
+        top: 20.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20.0,
+      ),
       child: Form(
         key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 16),
               
               // Name fields
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _firstNameController,
-                      textCapitalization: TextCapitalization.words,
-                      textInputAction: TextInputAction.next,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'First Name',
-                        labelStyle: const TextStyle(color: Colors.white70),
-                        hintText: 'John',
-                        hintStyle: const TextStyle(color: Colors.white60),
-                        prefixIcon: const Icon(Icons.person_outlined, color: Colors.white70),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Colors.white30),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  // Use column layout for smaller screens
+                  if (constraints.maxWidth < 400) {
+                    return Column(
+                      children: [
+                        TextFormField(
+                          controller: _firstNameController,
+                          textCapitalization: TextCapitalization.words,
+                          textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: 'First Name',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            hintText: 'John',
+                            hintStyle: const TextStyle(color: Colors.white60),
+                            prefixIcon: const Icon(Icons.person_outlined, color: Colors.white70),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Color(0xFF7B1FA2), width: 2),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Required';
+                            }
+                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                              return 'Only letters allowed';
+                            }
+                            return null;
+                          },
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Colors.white30),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _lastNameController,
+                          textCapitalization: TextCapitalization.words,
+                          textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: 'Last Name',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            hintText: 'Doe',
+                            hintStyle: const TextStyle(color: Colors.white60),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Color(0xFF7B1FA2), width: 2),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Required';
+                            }
+                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                              return 'Only letters allowed';
+                            }
+                            return null;
+                          },
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0xFF7B1FA2), width: 2),
+                      ],
+                    );
+                  }
+                  // Use row layout for wider screens
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _firstNameController,
+                          textCapitalization: TextCapitalization.words,
+                          textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: 'First Name',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            hintText: 'John',
+                            hintStyle: const TextStyle(color: Colors.white60),
+                            prefixIcon: const Icon(Icons.person_outlined, color: Colors.white70),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Color(0xFF7B1FA2), width: 2),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Required';
+                            }
+                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                              return 'Only letters allowed';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Required';
-                        }
-                        if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                          return 'Only letters allowed';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: TextFormField(
-                      controller: _lastNameController,
-                      textCapitalization: TextCapitalization.words,
-                      textInputAction: TextInputAction.next,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'Last Name',
-                        labelStyle: const TextStyle(color: Colors.white70),
-                        hintText: 'Doe',
-                        hintStyle: const TextStyle(color: Colors.white60),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Colors.white30),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Colors.white30),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0xFF7B1FA2), width: 2),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: TextFormField(
+                          controller: _lastNameController,
+                          textCapitalization: TextCapitalization.words,
+                          textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: 'Last Name',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            hintText: 'Doe',
+                            hintStyle: const TextStyle(color: Colors.white60),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.white30),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Color(0xFF7B1FA2), width: 2),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Required';
+                            }
+                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                              return 'Only letters allowed';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Required';
-                        }
-                        if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                          return 'Only letters allowed';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
+                    ],
+                  );
+                },
               ),
               
               const SizedBox(height: 20),
@@ -375,14 +458,17 @@ class _SignupPageState extends State<SignupPage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Checkbox(
-                    value: _agreeToTerms,
-                    onChanged: (value) {
-                      setState(() {
-                        _agreeToTerms = value ?? false;
-                      });
-                    },
-                    activeColor: const Color(0xFF4285F4),
+                  Transform.scale(
+                    scale: 0.9,
+                    child: Checkbox(
+                      value: _agreeToTerms,
+                      onChanged: (value) {
+                        setState(() {
+                          _agreeToTerms = value ?? false;
+                        });
+                      },
+                      activeColor: const Color(0xFF4285F4),
+                    ),
                   ),
                   Expanded(
                     child: GestureDetector(
@@ -391,27 +477,32 @@ class _SignupPageState extends State<SignupPage> {
                           _agreeToTerms = !_agreeToTerms;
                         });
                       },
-                      child: RichText(
-                        text: TextSpan(
-                          style: const TextStyle(color: Colors.black87, fontSize: 14),
-                          children: [
-                            const TextSpan(text: 'I agree to the '),
-                            TextSpan(
-                              text: 'Terms of Service',
-                              style: const TextStyle(
-                                color: Color(0xFF4285F4),
-                                decoration: TextDecoration.underline,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: RichText(
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.visible,
+                          text: TextSpan(
+                            style: const TextStyle(color: Colors.white70, fontSize: 13),
+                            children: [
+                              const TextSpan(text: 'I agree to the '),
+                              TextSpan(
+                                text: 'Terms of Service',
+                                style: const TextStyle(
+                                  color: Color(0xFF4285F4),
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
-                            ),
-                            const TextSpan(text: ' and '),
-                            TextSpan(
-                              text: 'Privacy Policy',
-                              style: const TextStyle(
-                                color: Color(0xFF4285F4),
-                                decoration: TextDecoration.underline,
+                              const TextSpan(text: ' and '),
+                              TextSpan(
+                                text: 'Privacy Policy',
+                                style: const TextStyle(
+                                  color: Color(0xFF4285F4),
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -463,8 +554,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-            ],
-          ),
+          ],
         ),
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
@@ -76,14 +75,19 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        left: 32.0,
+        right: 32.0,
+        top: 20.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20.0,
+      ),
       child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             
             // Email field
             TextFormField(
@@ -174,41 +178,95 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 16),
             
             // Remember me and forgot password
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+            LayoutBuilder(
+              builder: (context, constraints) {
+                // Stack vertically on smaller screens to prevent overflow
+                if (constraints.maxWidth < 400) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Transform.scale(
+                            scale: 0.9,
+                            child: Checkbox(
+                              value: _rememberMe,
+                              onChanged: (value) {
+                                setState(() {
+                                  _rememberMe = value ?? false;
+                                });
+                              },
+                              activeColor: const Color(0xFF4285F4),
+                            ),
+                          ),
+                          const Text(
+                            'Remember me',
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            // TODO: Implement forgot password
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Forgot password feature coming soon!'),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Forgot Password?',
+                            style: TextStyle(color: Color(0xFF4285F4)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                // Use row layout for wider screens
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Checkbox(
-                      value: _rememberMe,
-                      onChanged: (value) {
-                        setState(() {
-                          _rememberMe = value ?? false;
-                        });
-                      },
-                      activeColor: const Color(0xFF4285F4),
+                    Row(
+                      children: [
+                        Transform.scale(
+                          scale: 0.9,
+                          child: Checkbox(
+                            value: _rememberMe,
+                            onChanged: (value) {
+                              setState(() {
+                                _rememberMe = value ?? false;
+                              });
+                            },
+                            activeColor: const Color(0xFF4285F4),
+                          ),
+                        ),
+                        const Text(
+                          'Remember me',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      ],
                     ),
-                    const Text(
-                      'Remember me',
-                      style: TextStyle(color: Colors.black87),
+                    TextButton(
+                      onPressed: () {
+                        // TODO: Implement forgot password
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Forgot password feature coming soon!'),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Color(0xFF4285F4)),
+                      ),
                     ),
                   ],
-                ),
-                TextButton(
-                  onPressed: () {
-                    // TODO: Implement forgot password
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Forgot password feature coming soon!'),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Color(0xFF4285F4)),
-                  ),
-                ),
-              ],
+                );
+              },
             ),
             
             const SizedBox(height: 32),
