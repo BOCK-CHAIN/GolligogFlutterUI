@@ -39,8 +39,8 @@ mv /home/ubuntu/web /home/ubuntu/webapp
 
 This step is what prevents the 500 “Permission Denied” error:
 
-sudo chown -R www-data:www-data /home/ubuntu/webapp
-sudo chmod -R 755 /home/ubuntu/webapp
+sudo chown -R www-data:www-data /home/ubuntu/web
+sudo chmod -R 755 /home/ubuntu/web
 sudo chmod 755 /home/ubuntu
 
 
@@ -64,7 +64,7 @@ server {
     listen 80;
     server_name _;
 
-    root /home/ubuntu/webapp;
+    root /home/ubuntu/web;
     index index.html;
 
     location / {
